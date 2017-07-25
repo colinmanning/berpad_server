@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+WSGI_APPLICATION = 'berpad.wsgi.application'
+
 
 # Application definition
 
@@ -37,6 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'corsheaders',
+    'django.contrib.admindocs',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_swagger',
+    'berpad',
+    'berpad_ws',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'berpad_server.berpad.urls'
+ROOT_URLCONF = 'berpad.urls'
 
 TEMPLATES = [
     {
