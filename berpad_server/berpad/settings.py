@@ -59,6 +59,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+WSGI_APPLICATION = 'berpad.wsgi.application'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 ROOT_URLCONF = 'berpad.urls'
 
 TEMPLATES = [
@@ -77,8 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'berpad_server.wsgi.application'
 
 
 # Database
