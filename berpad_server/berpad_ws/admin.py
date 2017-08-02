@@ -16,13 +16,13 @@ class SportAdmin(admin.ModelAdmin):
     fields = ('name', )
 
 @admin.register(SportFacility)
-class SportAdmin(admin.ModelAdmin):
+class SportFacilityAdmin(admin.ModelAdmin):
     fields = ('name', )
 
 @admin.register(SportClub)
-class SportAdmin(admin.ModelAdmin):
+class SportClubAdmin(admin.ModelAdmin):
     fields = ('name', )
 
 @admin.register(SportVenue)
-class SportAdmin(admin.ModelAdmin):
+class SportVenueAdmin(admin.ModelAdmin):
     fields = ('name', )

@@ -47,8 +47,8 @@ A Venue represents a place where events happen
 class Venue(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False, unique=False, default='',
                             help_text='the venue name')
-    longitude = models.FloatField(default=0.0, null=False, unique=False, _text='gps longitude')
-    latitude = models.FloatField(default=0.0, null=False, unique=False, _text='gps longitude')
+    longitude = models.FloatField(default=0.0, null=False, unique=False, help_text='gps longitude')
+    latitude = models.FloatField(default=0.0, null=False, unique=False, help_text='gps longitude')
     indoor = models.BooleanField(default = False, help_text="has indoor facilities")
     outdoor = models.BooleanField(default = False, help_text="has outdoor facilities")
 
