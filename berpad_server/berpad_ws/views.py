@@ -44,8 +44,13 @@ from wsgiref.util import FileWrapper
 
 from django.db.utils import IntegrityError
 
-from .models import Event
+from .models import Event, Club, Venue
+from .models import Sport, SportFacility, SportClub, SportVenue
 
+from .serializers import UserSerializer
+from .serializers import PasswordSerializer
+from .serializers import SportSerializer
+from .serializers import ClubSerializer
 from .serializers import EventSerializer
 
 from django.conf import settings
@@ -99,5 +104,18 @@ class EventViewSet(viewsets.ModelViewSet):
     '''
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+'''
+A ViewSet to handle Sports
+'''
+
+class SportViewSet(viewsets.ModelViewSet):
+    '''
+    A Program for which proposals are made
+    '''
+    queryset = Sport.objects.all()
+    serializer_class = SportSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)

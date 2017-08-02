@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Event
 from .models import Venue
+from .models import Club
 from .models import Sport, SportClub, SportVenue, SportFacility
 
 @admin.register(Event)
@@ -19,9 +20,13 @@ class SportAdmin(admin.ModelAdmin):
 class SportFacilityAdmin(admin.ModelAdmin):
     fields = ('name', )
 
+@admin.register(Club)
+class ClubAdmin(admin.ModelAdmin):
+    fields = ('name', 'short_name', 'crest', )
+
 @admin.register(SportClub)
 class SportClubAdmin(admin.ModelAdmin):
-    fields = ('name', )
+    fields = ('name', 'short_name', 'crest', 'sports', )
 
 @admin.register(SportVenue)
 class SportVenueAdmin(admin.ModelAdmin):

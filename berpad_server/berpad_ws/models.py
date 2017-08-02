@@ -27,17 +27,8 @@ A Sport encapsulates all things related to a sporting activity, including rules 
 A Sports event will link to a Sport
 '''
 class Sport(models.Model):
-    name = models.CharField(max_length=30, blank=False, null=False, unique=True, default='',
+    name = models.CharField(max_length=50, blank=False, null=False, unique=True, default='',
                             help_text='sport name')
-    def __str__(self):
-        return self.name
-
-'''
-A SportFacility represents a available facilities, such as football pitch, running track, gym etc.
-'''
-class SportFacility(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False, unique=False, default='',
-                            help_text='the facility name')
     def __str__(self):
         return self.name
 
@@ -84,8 +75,10 @@ class Event(models.Model):
 A club encapsulates any type of club, and in general serves as a sub class for specific types of clubs
 '''
 class Club(models.Model):
-    name = models.CharField(max_length=30, blank=False, null=False, unique=True, default='',
+    name = models.CharField(max_length=50, blank=False, null=False, unique=True, default='',
                             help_text='club name')
+    short_name = models.CharField(max_length=30, blank=False, null=False, unique=True, default='',
+                            help_text='a short name for the club, used in fixture lists etc')
     crest = models.ImageField(help_text='club crest/logo')
 
     def __str__(self):
