@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboard">
+<head>
+    <meta charset="UTF-8">
+    <title>BerPad Dashboard</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.12.0.js"></script>
+
+    <script src="js/app.js"></script>
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body ng-controller="MainController">
+    <div class="body"></div>
+		<div class="header">
+			<h1 class="logo">BerPad</h1>
+            <div id="softwareVer">Software version: {{softwareVer}}</div>
+		</div>
+		<br>
+		<div class="login">
+            <div ng-if="!loggedIn">
+                <input type="text" placeholder="club_code" name="user" ng-model="club_code" ng-change="clubCodeChanged(username)"><br>
+                <input type="text" placeholder="username" name="user" ng-model="username" ng-change="usernameChanged(username)"><br>
+				<input type="password" placeholder="password" name="password" ng-model="password" ng-change="passwordChanged(password)"><br>
+				<input type="button" value="Login" ng-click="loginClicked()">
+                <p ng-if="errorLogin">Username or Password incorrect</br>Please try agian</p>
+            </div>
+            <div ng-if="loggedIn">
+                <button class="customBtn green" ng-click="menuClicked('backoffice')">Back Office</button><br>
+                <button class="customBtn green" ng-click="menuClicked('testin')">TestIn Tool</button><br>
+                <button class="customBtn green" ng-click="menuClicked('canary2')">Canary 2</button><br>
+                <br>
+                <button class="customBtn red" ng-click="logoutClicked()">Logout</button>
+            </div>
+        </div>
+</body>
+</html>
