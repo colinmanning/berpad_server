@@ -1,0 +1,177 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #2a2d2b;
+	padding: 20px;
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+h1 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url(../img/backgroundLogin.jpg);
+	background-size: cover;
+	z-index: 0;
+}
+
+.header{
+	position: absolute;
+	top: calc(50% - 65px);
+	left: calc(50% - 355px);
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+}
+
+.header div span{
+	color: #5379fa !important;
+}
+
+h1.logo {
+      width: 261px;
+      height: 116px;
+      background: url(../img/logo2.png);
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+#softwareVer {
+	font-size: 12px;
+	text-align: right;
+	padding-top: 10px;
+	width: 100%;
+}
+
+.login{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px 3%;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px 3%;
+	margin-top: 10px;
+}
+
+.login input[type=button]{
+	width: 275px;
+	height: 35px;
+	transition: background-color 0.5s ease;
+	background: #75bf35;
+	border: 1px solid #149e3e;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px 12px;
+	margin-top: 10px;
+}
+
+.login input[type=button]:hover{
+	background: #179e3e;
+}
+
+.login input[type=button]:active{
+	background: #85e731;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+@media (max-width: 600px) {
+.login { position: relative; width:70%; margin: 0 auto; top: calc(40px - 0px); left: calc(0px - 0px);  }
+.header { position: relative; width: 261px; margin: 0 auto; top: calc(80px - 40px); left: calc(0px - 0px); }
+.login input[type=text]{ position: relative; width:94%; }
+.login input[type=password]{ position: relative; width:94%; }
+.login input[type=button]{ position: relative; width:100%; }
+}
+
+.customBtn {
+	width: 100%;
+	padding: 5px;
+	font-size: 18px;
+	border: none;
+	color: #fff;
+	margin: 10px;
+	text-transform: uppercase;
+    cursor: pointer;
+}
+.green {
+    background: -webkit-linear-gradient(#7AC040, #2E9733);
+    background: -o-linear-gradient(#7AC040, #2E9733);
+    background: -moz-linear-gradient(#7AC040, #2E9733);
+    background: linear-gradient(#7AC040, #2E9733);
+}
+.red {
+    background: -webkit-linear-gradient(#E33B30, #CD234A);
+    background: -o-linear-gradient(#E33B30, #CD234A);
+    background: -moz-linear-gradient(#E33B30, #CD234A);
+    background: linear-gradient(#E33B30, #CD234A);
+}

@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 from rest_framework.authtoken import views
 from berpad_ws import views as bp_wsViews
 
@@ -28,11 +32,12 @@ from rest_framework_swagger.views import get_swagger_view
 @api_view()
 @renderer_classes([SwaggerUIRenderer, OpenAPIRenderer, renderers.CoreJSONRenderer])
 def schema_view(request):
-    generator = schemas.SchemaGenerator(title='Apiary API')
+    generator = schemas.SchemaGenerator(title='Berpad API')
     return response.Response(generator.get_schema(request=request))
 
 router = DefaultRouter()
 router.register(r'sports', bp_wsViews.SportViewSet)
+router.register(r'sportclubs', bp_wsViews.SportClubViewSet)
 
 urlpatterns = [
     url('^$', schema_view),
@@ -40,4 +45,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
+] +     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
