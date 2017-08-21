@@ -36,11 +36,11 @@ class SportFacilityAdmin(admin.ModelAdmin):
 
 @admin.register(Club)
 class ClubAdmin(admin.ModelAdmin):
-    fields = ('name', 'short_name', 'code', 'crest', )
+    fields = ('name', 'short_name', 'code', 'crest', 'email', 'web_site', 'facebook', 'twitter', 'instagram', 'linkedin', )
 
 @admin.register(SportClub)
 class SportClubAdmin(admin.ModelAdmin):
-    fields = ('name', 'short_name', 'code', 'crest', 'sports', )
+    fields = ('name', 'short_name', 'code', 'crest', 'email', 'web_site', 'facebook', 'twitter', 'instagram', 'linkedin', 'sports', )
 
 @admin.register(SportVenue)
 class SportVenueAdmin(admin.ModelAdmin):

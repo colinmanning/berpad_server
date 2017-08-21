@@ -47,7 +47,7 @@ class ClubSerializer(serializers.ModelSerializer):
     class Meta:
         app_label = 'berpad_ws'
         model = Club
-        fields = ('id', 'name', 'code', 'short_name', 'crest', )
+        fields = ('id', 'name', 'code', 'short_name', 'crest', 'email', 'web_site', 'facebook', 'twitter', 'instagram', 'linkedin', )
 
 class VenueCategorySerializer(serializers.ModelSerializer):
     fields = ('name', 'code', )
@@ -75,7 +75,7 @@ class SportClubSerializer(ClubSerializer):
     class Meta:
         app_label = 'berpad_ws'
         model = SportClub
-        fields = ('id', 'name', 'code', 'short_name', 'crest', 'sports', )
+        fields = ('id', 'name', 'code', 'short_name', 'crest', 'email', 'web_site', 'facebook', 'twitter', 'instagram', 'linkedin', 'sports', )
 
 class SportTournamentSerializer(EventSerializer):
     class Meta:

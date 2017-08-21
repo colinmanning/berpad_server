@@ -85,7 +85,6 @@ class VenueCategory(models.Model):
     def __str__(self):
         return ('%s (%s)') % (self.name, self.code, )
 
-
 '''
 A Venue represents a place where events happen
 '''
@@ -144,6 +143,18 @@ class Club(models.Model):
                             help_text='unique code for the club')
     short_name = models.CharField(max_length=30, blank=False, null=False, unique=True, default='',
                             help_text='a short name for the club, used in fixture lists etc')
+    email = models.CharField(max_length=50, blank=False, null=False, unique=False, default='',
+                            help_text='the club email address')
+    web_site = models.CharField(max_length=50, blank=True, null=True, unique=False, default='',
+                            help_text='the club web site')
+    facebook = models.CharField(max_length=50, blank=True, null=False, unique=False, default='',
+                            help_text='the club facebook page')
+    twitter = models.CharField(max_length=50, blank=True, null=True, unique=False, default='',
+                            help_text='the club twitter page')
+    instagram = models.CharField(max_length=50, blank=True, null=True, unique=False, default='',
+                            help_text='the club instagram pages')
+    linkedin = models.CharField(max_length=50, blank=True, null=True, unique=False, default='',
+                            help_text='the club linkedin page')
     crest = models.ImageField(help_text='club crest/logo', null=True)
 
     def __str__(self):

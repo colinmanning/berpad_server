@@ -95,7 +95,24 @@ DATABASES = {
         'PASSWORD': 'berpad',
         'HOST': 'localhost',
         'PORT': '',
-    }
+    },
+    'local': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'berpad',
+        'USER': 'berpad',
+        'PASSWORD': 'berpad',
+        'HOST': 'localhost',
+        'PORT': '',
+    },
+    'berpad_staging': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'berpad_staging',
+        'USER': 'berpad',
+        'PASSWORD': '2ParkHill53',
+        'HOST': 'berpaddb.ct3sba69t4ly.eu-west-1.rds.amazonaws.com',
+        'PORT': '5432',
+    },
+
 }
 
 

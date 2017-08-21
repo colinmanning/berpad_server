@@ -43,7 +43,7 @@ urlpatterns = [
     url('^$', schema_view),
     url(r'^', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] +     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -25,16 +25,17 @@
 		<br>
 		<div class="login">
             <div ng-if="!loggedIn">
-                <input type="text" placeholder="club_code" name="user" ng-model="club_code" ng-change="clubCodeChanged(username)"><br>
+                <input type="text" placeholder="club code" name="user" ng-model="clubCode" ng-change="clubCodeChanged(username)"><br>
                 <input type="text" placeholder="username" name="user" ng-model="username" ng-change="usernameChanged(username)"><br>
 				<input type="password" placeholder="password" name="password" ng-model="password" ng-change="passwordChanged(password)"><br>
 				<input type="button" value="Login" ng-click="loginClicked()">
                 <p ng-if="errorLogin">Username or Password incorrect</br>Please try agian</p>
             </div>
             <div ng-if="loggedIn">
-                <button class="customBtn green" ng-click="menuClicked('backoffice')">Back Office</button><br>
-                <button class="customBtn green" ng-click="menuClicked('testin')">TestIn Tool</button><br>
-                <button class="customBtn green" ng-click="menuClicked('canary2')">Canary 2</button><br>
+                <button class="customBtn green" ng-click="menuClicked('berladadmin')">Berpad Admin</button><br>
+                <button class="customBtn green" ng-click="menuClicked('clubadmin')">Club Admin</button><br>
+                <button class="customBtn green" ng-click="menuClicked('tournamentadmin')">Tournament Admin</button><br>
+                <button class="customBtn green" ng-click="menuClicked('myberpad')">My Berpad</button><br>
                 <br>
                 <button class="customBtn red" ng-click="logoutClicked()">Logout</button>
             </div>

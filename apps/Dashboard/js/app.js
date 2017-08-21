@@ -3,26 +3,30 @@ var dashboard = angular.module( 'dashboard', [] );
 dashboard.controller( 'MainController', [ '$scope', '$timeout', function( $scope, $timeout ) {
 
     $scope.loggedIn = false;
+    $scope.clubCode = "";
     $scope.username = "";
     $scope.password = "";
     $scope.errorLogin = false;
 
-    $scope.softwareVer = "1.10.15";
+    $scope.softwareVer = "1.0.0.0";
     $.cookie('softwareVer', $scope.softwareVer, { path: '/' });
 
-    if($.cookie('nectarToken') != null){
+    if($.cookie('berpadToken') != null){
         $scope.loggedIn = true;
     } else {
         $scope.loggedIn = false;
     }
 
-    var apiUrl = "http://api.nectar.resourcekraft.com";
-    if(location.href.indexOf('apiary.lime-energy.com') > -1){
-        apiUrl = "https://apiary-api-dev.lime-energy.com";
+    var apiUrl = "http://api.berpad.com";
+    if(location.href.indexOf('production.berpad.com') > -1){
+        apiUrl = "https://production-api-dev.berpad.com";
     } else if(location.href.indexOf('localhost') > -1){
         apiUrl = "http://127.0.0.1:8000";
     }
 
+    $scope.clubCodeChanged = function(clubCode){
+        $scope.clubCode = clubCode;
+    };
     $scope.usernameChanged = function(username){
         $scope.username = username;
     };
@@ -39,9 +43,10 @@ dashboard.controller( 'MainController', [ '$scope', '$timeout', function( $scope
                 password: $scope.password
             },
             success: function(response) {
-                $.cookie('nectarToken', response.token, { path: '/' });
-                $.cookie('nectarUsername', $scope.username, { path: '/' });
+                $.cookie('berpadToken', response.token, { path: '/' });
+                $.cookie('berpadUsername', $scope.username, { path: '/' });
                 $timeout(function(){
+                    $scope.clubCode = "";
                     $scope.username = "";
                     $scope.password = "";
                     $scope.loggedIn = true;
@@ -64,8 +69,8 @@ dashboard.controller( 'MainController', [ '$scope', '$timeout', function( $scope
         }
     };
     $scope.logoutClicked = function(){
-        $.removeCookie('nectarToken', { path: '/' });
-        $.removeCookie('nectarUsername', { path: '/' });
+        $.removeCookie('berpadToken', { path: '/' });
+        $.removeCookie('berpadUsername', { path: '/' });
         $scope.loggedIn = false;
     }
 }]);
