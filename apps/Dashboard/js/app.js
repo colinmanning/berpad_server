@@ -18,8 +18,8 @@ dashboard.controller( 'MainController', [ '$scope', '$timeout', function( $scope
     }
 
     var apiUrl = "http://api.berpad.com";
-    if(location.href.indexOf('production.berpad.com') > -1){
-        apiUrl = "https://production-api-dev.berpad.com";
+    if(location.href.indexOf('staging.berpad.com') > -1){
+        apiUrl = "http://staging-api-dev.berpad.com";
     } else if(location.href.indexOf('localhost') > -1){
         apiUrl = "http://127.0.0.1:8000";
     }
