@@ -60,12 +60,14 @@ dashboard.controller( 'MainController', [ '$scope', '$timeout', function( $scope
         });
     };
     $scope.menuClicked = function(appName){
-        if(appName == 'testin'){
-            window.location.replace("apps/TestInTool");
-        } else if(appName == 'backoffice'){
-            window.location.replace("apps/BackOffice");
-        } else if(appName == 'canary2'){
-            window.location.replace("apps/Canary2web/admin/templates/admin.jinja2.html");
+        if(appName == 'berpadadmin'){
+            window.location.replace("apps/BerpadAdmin");
+        } else if(appName == 'clubadmin'){
+            window.location.replace("apps/ClubAdmin");
+        } else if(appName == 'tournamentadmin'){
+            window.location.replace("apps/TournamentAdmin");
+        } else if(appName == 'myberpad'){
+            window.location.replace("apps/MyAdminl");
         }
     };
     $scope.logoutClicked = function(){

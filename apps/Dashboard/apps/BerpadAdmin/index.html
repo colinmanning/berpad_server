@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="backoffice">
+<head>
+    <meta charset="utf-8"/>
+    <title>Back Office</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/custom_icons.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/angular-material.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/modal.css"/>
+
+    <script src="../../js/jquery-1.12.3.min.js"></script>
+    <script src="../../js/jquery-ui.min.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <script src="../../js/mqttws31_.js"></script>
+    <script src="../../js/angular.js"></script>
+    <script src="../../js/angular-animate.min.js"></script>
+    <script src="../../js/angular-aria.min.js"></script>
+    <script src="../../js/angular-messages.min.js"></script>
+    <script src="../../js/ng-file-upload-shim.min.js"></script>
+    <script src="../../js/ng-file-upload.min.js"></script>
+    <script src="../../js/angular-material.min.js"></script>
+     <script src="../../js/moment.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/controllers/mainController.js"></script>
+    <script src="js/controllers/usersController.js"></script>
+    <script src="js/controllers/clubController.js"></script>
+    <script src="js/services/berpadService.js"></script>
+    <script src="js/services/mqttService.js"></script>
+
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body ng-controller="MainController" layout="column">
+    <div layout="row" class="header">
+        <div flex="40" id="limeLogo">
+            <img src="images/Lime_back_office_logo.png">
+            <span id="softwareVer">v.{{$root.softwareVer}}</span>
+        </div>
+        <div flex="40">
+            <span id="selectedBusiness">{{$root.selectedBusiness.name}}</span>
+        </div>
+        <div flex="10" class="mainMenu greenMainBtn">
+            <div ng-click="backClicked()">
+                <span id="icon-back" class="fa fa-th"></span>
+                <span class="mainMenuText">Back</span>
+            </div>
+        </div>
+        <div flex="10" class="mainMenu" id="profileIcon" ng-click="profileClicked()">
+            <span class="icon-profile"></span>
+            <span class="mainMenuText">{{$root.username}}</span>
+        </div>
+    </div>
+    <div layout="row" flex>
+        <div id="sidebar">
+            <div class="menuItem" id="bussinessMenuItem" ng-class="{'active': currentTab == 2}" ng-click="changeTab(2)">
+                <span class="icon fa fa-briefcase"></span>
+                <span class="menuText">Business</span>
+            </div>
+            <div class="menuItem" id="programMenuItem" ng-class="{'active': currentTab == 7}" ng-click="changeTab(7)">
+                <span class="icon fa fa-file-text-o"></span>
+                <span class="menuText">Program</span>
+            </div>
+            <div class="menuItem" ng-if="$root.selectedBusiness" id="userMenuItem" ng-class="{'active': currentTab == 1}" ng-click="changeTab(1)">
+                <span class="icon fa fa-users"></span>
+                <span class="menuText">Users</span>
+            </div>
+            <div class="menuItem" ng-if="$root.selectedBusiness" id="gatewayMenuItem" ng-class="{'active': currentTab == 3}" ng-click="changeTab(3)">
+                <span class="icon fa fa-signal"></span>
+                <span class="menuText">Gateways</span>
+            </div>
+            <!-- CTs going into Gateway panel after discussing with Martin - Colin
+            <div class="menuItem" ng-if="$root.selectedBusiness" id="pressacMenuItem" ng-class="{'active': currentTab == 4}" ng-click="changeTab(4)">
+                <span class="icon fa fa-dot-circle-o"></span>
+                <span class="menuText">CTs</span>
+            </div>
+            -->
+            <div class="menuItem" ng-if="$root.selectedBusiness" id="projectMenuItem" ng-class="{'active': currentTab == 5}" ng-click="changeTab(5)">
+                <span class="icon fa fa-bolt"></span>
+                <span class="menuText">Projects</span>
+            </div>
+            <div class="menuItem" ng-if="$root.selectedBusiness" id="proposalMenuItem" ng-class="{'active': currentTab == 6}" ng-click="changeTab(6)">
+                <span class="icon fa fa-handshake-o"></span>
+                <span class="menuText">Proposal</span>
+            </div>
+
+        </div>
+        <div id="mainContent">
+            <div ng-if="currentTab == 1" ng-include="'partials/userSection.html'"></div>
+            <div ng-if="currentTab == 2" ng-include="'partials/deprecated/businessSection.html'"></div>
+        </div>
+    </div>
+</body>
+</html>

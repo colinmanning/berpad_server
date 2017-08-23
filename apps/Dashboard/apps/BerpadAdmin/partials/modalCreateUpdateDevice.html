@@ -1,0 +1,41 @@
+<div layout="row" class="modalHeader">
+    <span flex="80">{{title}}</span>
+    <span flex="20" class="cancelBtn" ng-click="cancel()">Cancel</span>
+</div>
+<div layout="row" class="modalTabs">
+    <div flex="100" ng-class="{active: currentTab == 1}">
+        <span>1. Details</span>
+    </div>
+</div>
+<form name="deviceForm">
+    <div class="modalContent">
+        <div ng-if="currentTab == 1">
+            <div layout="row" class="row-padLR">
+
+                <md-input-container flex>
+                    <label>Model</label>
+                    <md-select ng-model="selectedDevice.model">
+                        <md-option ng-value="model" ng-repeat="model in models">{{ model }}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Device Id (8 characters)</label>
+                    <input name="name" ng-minlength="8" ng-model="selectedDevice.thingid" required>
+                    <div ng-messages="deviceForm.name.$error">
+                        <div ng-message="required">Device ID is required!</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div layout="row" class="modalFooter">
+        <div flex="50" class="row-padLR">
+            <md-button class="md-raised" ng-if="currentTab > 1" ng-click="previous()">Previous</md-button>
+            <md-button class="md-raised" ng-disabled="siteForm.$invalid" ng-if="currentTab < 3" ng-click="next()">Next</md-button>
+        </div>
+        <div flex="50" class="row-padLR">
+            <md-button ng-if="currentTab == 3" class="md-raised" ng-click="saveCT(false)">Save & Create Another</md-button>
+            <md-button ng-if="currentTab == 3" class="md-raised" ng-click="saveCT(true)">Save & Exit</md-button>
+        </div>
+    </div>
+</form>

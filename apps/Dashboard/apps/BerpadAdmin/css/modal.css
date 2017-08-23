@@ -1,0 +1,53 @@
+.modal {
+    max-height: 90%
+}
+
+.modal .modal-content {
+    padding: 0px;
+    background-color: rgba(20,20,20,0.8);
+    color: #ccc;
+    overflow:auto;
+}
+.modalHeader {
+    background-color: #FF7900;
+    height: 64px;
+    color: #fff;
+    width: 100%;
+    float: left;
+}
+.modalHeader span{
+    padding: 15px;
+    float: left;
+    font-size: 24px;
+    display: block;
+}
+.cancelBtn {
+    background-color: #FE9C03;
+    text-align: center;
+    cursor: pointer;
+}
+.modalTabs {
+    width: 100%;
+    padding: 20px;
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    background-color: #ebebeb;
+}
+.modalTabs .active {
+    color: #69B052;
+}
+.modalContent {
+    width: 100%;
+    padding: 0 20px 0 20px;
+    float: left;
+}
+.modalContent input, .modalContent select, .modalContent label{
+    color: #ccc;
+    border-color: #ccc;
+}
+.modalFooter {
+    width: 100%;
+    padding: 20px;
+    float: left;
+}

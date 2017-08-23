@@ -1,0 +1,165 @@
+<md-dialog flex="80">
+<div layout="row" class="modalHeader">
+    <span flex="80" class="marginL20">{{title}}</span>
+    <span flex="20" class="cancelBtn" ng-click="cancel()">Cancel</span>
+</div>
+<div layout="row" class="modalTabs">
+    <div flex="50" ng-class="{active: currentTab == 1}">
+        <span>1. Address</span>
+    </div>
+    <div flex="50" ng-class="{active: currentTab == 2}">
+        <span>2. Contact</span>
+    </div>
+</div>
+<form name="siteForm">
+    <md-dialog-content>
+        <div ng-if="currentTab == 1">
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Site Name</label>
+                    <input name="name" ng-model="site.name" required>
+                    <div ng-messages="siteForm.name.$error">
+                        <div ng-message="required">Name is required!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>District</label>
+                    <input name="district" ng-model="site.district">
+                </md-input-container>
+                <div flex>
+                    <span>Business Headquarters</span>
+                    <md-checkbox ng-model="site.is_hq"></md-checkbox>
+                </div>
+            </div>
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Street 1</label>
+                    <input name="street_1" ng-model="site.street_1">
+                    <div ng-messages="siteForm.street_1.$error">
+                        <div ng-message="required">Street 1 is required!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Street 2</label>
+                    <input name="house" ng-model="site.street_2">
+                </md-input-container>
+
+            </div>
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>City</label>
+                    <input name="city" ng-model="site.city">
+                    <div ng-messages="siteForm.city.$error">
+                        <div ng-message="required">City is required!</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>ZIP</label>
+                    <input name="zip" ng-model="site.zip">
+                    <div ng-messages="siteForm.zip.$error">
+                        <div ng-message="required">Zip is required!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>State</label>
+                    <input name="state" ng-model="site.state">
+                    <div ng-messages="siteForm.state.$error">
+                        <div ng-message="required">State is required!</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Country</label>
+                    <input name="country" ng-model="site.country">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Latitude</label>
+                    <input type="number" name="latitude" ng-model="site.latitude">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Longitude</label>
+                    <input type="number" name="longitude" ng-model="site.longitude">
+                </md-input-container>
+            </div>
+        </div>
+        <div ng-if="currentTab == 2">
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Account Number</label>
+                    <input name="account_number" ng-model="site.account_number">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Manager</label>
+                    <md-select ng-model="site.manager">
+                        <md-option ng-value="user.id" ng-repeat="user in $root.users">{{ user.username }}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Tariff</label>
+                    <md-select ng-model="site.tariff" ng-model-options="{trackBy: '$value'}">
+                        <md-option ng-value="tariff.id" ng-repeat="tariff in tariffs">{{ tariff.name }}</md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Run Hours</label>
+                    <input type="number" name="run_hours" ng-model="site.run_hours">
+                </md-input-container>
+            </div>
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Billing Email</label>
+                    <input name="billing_email" ng-model="site.billing_email">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Billing Contact</label>
+                    <input name="billing_contact" ng-model="site.billing_contact">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Contact Title</label>
+                    <input name="billing_title" ng-model="site.billing_title">
+                </md-input-container>
+
+            </div>
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Phone</label>
+                    <input name="phone" ng-model="site.phone">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Fax</label>
+                    <input name="fax" ng-model="site.fax">
+                </md-input-container>
+            </div>
+            <div layout="row" class="row-padLR">
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input type="email" name="email" ng-model="site.email">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Website</label>
+                    <input type="url" name="website" ng-model="site.website">
+                </md-input-container>
+            </div>
+         </div>
+     </md-dialog-content>
+    <md-dialog-actions>
+        <div flex="50" class="row-pad40LR">
+            <md-button class="md-raised" ng-if="currentTab > 1" ng-click="previous()">Previous</md-button>
+            <md-button class="md-raised" ng-disabled="siteForm.$invalid" ng-if="currentTab < 2" ng-click="next()">Next</md-button>
+        </div>
+        <div flex="50" class="row-pad40LR">
+            <md-button ng-if="currentTab == 2" class="md-raised" ng-click="saveSite(false)">Save & Create Another</md-button>
+            <md-button ng-if="currentTab == 2" class="md-raised" ng-click="saveSite(true)">Save & Exit</md-button>
+        </div>
+    </md-dialog-actions>
+</form>
+    </md-dialog>

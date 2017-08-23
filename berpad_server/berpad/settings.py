@@ -106,7 +106,7 @@ DATABASES = {
     },
     'berpad_staging': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'berpad_staging',
+        'NAME': 'berpad',
         'USER': 'berpad',
         'PASSWORD': '2ParkHill53',
         'HOST': 'berpaddb.ct3sba69t4ly.eu-west-1.rds.amazonaws.com',

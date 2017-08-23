@@ -1,0 +1,43 @@
+<div ng-controller="PressacController" flex="80">
+    <md-dialog flex="80">
+        <div layout="row" class="modalHeader">
+            <span flex="80">{{title}}</span>
+            <span flex="20" class="cancelBtn" ng-click="cancel()">Cancel</span>
+        </div>
+        <div layout="row" class="modalTabs">
+            <div flex="100" class="active">
+                <span>Enter Details</span>
+            </div>
+        </div>
+        <form name="meterForm">
+            <md-dialog-content>
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Model</label>
+                        <md-select ng-model="meter.model">
+                            <md-option ng-value="model" ng-repeat="model in models">{{ model.name }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Meter Id (8 characters)</label>
+                        <input name="name" ng-minlength="8" ng-maxlength="8" ng-model="meter.pressacid" required>
+                        <div ng-messages="meterForm.name.$error">
+                            <div ng-message="required">Meter ID is required!</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions>
+                <div flex="50">&nbsp;</div>
+                <div flex="50">
+                    <md-button class="md-raised" ng-disabled="meterForm.$invalid" ng-click="saveMeter(false)">Save &
+                        Create
+                        Another
+                    </md-button>
+                    <md-button class="md-raised" ng-disabled="meterForm.$invalid" ng-click="saveMeter(true)">Save & Exit
+                    </md-button>
+                </div>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+</div>

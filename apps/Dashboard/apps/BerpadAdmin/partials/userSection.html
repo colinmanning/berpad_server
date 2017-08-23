@@ -1,0 +1,125 @@
+<div ng-controller="UsersController">
+
+    <div layout="row" class="row-padLR">
+        <div flex="60">
+            <h2 class="marginV20">Users:</h2>
+        </div>
+        <div flex="40">
+            <h4 ng-if="selectedUser && searchQuery == ''"><span class="breadcrumbMain">Users</span> <span
+                    class="breadcrumbSub"> > {{crudType}} User</span></h4>
+        </div>
+    </div>
+
+    <div layout="row" class="row-padLR">
+        <div flex="50">
+            <md-button class="md-raised" ng-click="showAll()">Show All</md-button>
+            &nbsp; or &nbsp;
+            <md-input-container class="searchWrapper">
+                <label>Search Users</label>
+                <input type="text" ng-model="searchQuery" ng-change="searchChanged(searchQuery)">
+            </md-input-container>
+        </div>
+
+        <div flex="50">
+            <md-button class="md-raised" ng-click="emptyUser()">New User</md-button>
+        </div>
+    </div>
+
+    <div layout="row" class="row-padLR">
+        <md-progress-circular ng-if="userListLoading" md-mode="indeterminate" md-diameter="50"></md-progress-circular>
+        <p ng-if="noResults && users.length == 0">No Results</p>
+        <ul class="contentList" ng-if="showRecords">
+            <li ng-repeat="user in filteredUsers" ng-click="selectUser(user)">{{user.username}}</li>
+        </ul>
+    </div>
+
+    <form name="userForm" novalidate>
+    <div class="row selectedUser row-padLR" ng-if="selectedUser && searchQuery == ''">
+        <div layout="row">
+            <md-input-container flex="33" class="row-padR">
+                <label>First Name</label>
+                <input type="text" name="first_name" ng-model="selectedUser.first_name" ng-required="true">
+                <div ng-messages="userForm.first_name.$error"
+                     ng-if="userForm.first_name.$dirty">
+                    <div ng-message="required">First name is required!</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="33" class="row-padR">
+                <label>Last Name</label>
+                <input type="text" name="last_name" ng-model="selectedUser.last_name" ng-required="true">
+                <div ng-messages="userForm.first_name.$error"
+                     ng-if="userForm.last_name.$dirty">
+                    <div ng-message="required">Last name is required!</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="33" class="row-padR">
+                <label>Email</label>
+                <input type="email" name="email" ng-model="selectedUser.email" ng-required="true" ng-pattern="/^.+@.+\..+$/">
+                <div ng-messages="userForm.email.$error" ng-if="userForm.email.$dirty">
+                    <div ng-message="required">Email is required!</div>
+                    <div ng-message="pattern">This is not an email format</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-input-container flex="33" class="row-padR">
+                <label>Business</label>
+                <input type="text" ng-model="$root.selectedBusiness.name" disabled>
+            </md-input-container>
+            <md-input-container flex="33" class="row-padR">
+                <label>Username</label>
+                <input type="text" name="username" ng-model="selectedUser.username" ng-disabled="crudType == 'Edit'" ng-required="true">
+                <div ng-messages="userForm.username.$error" ng-if="userForm.username.$dirty">
+                    <div ng-message="required">Username is required!</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="33" class="row-padR">
+                <label>Password</label>
+                <input type="password" name="password" md-minlength="6" ng-model="selectedUser.password" ng-required="true" ng-minlength="6">
+                <div ng-messages="userForm.password.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Password is required!</div>
+                    <div ng-message="minlength">Must be at least 6 characters!</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-input-container flex="33" class="row-padR">
+                <label>Role</label>
+                <md-select multiple ng-model="selectedUser.role" name="role" ng-required="true">
+                    <md-option ng-value="role.id" ng-repeat="role in roles">{{ role.name }}</md-option>
+                </md-select>
+                <div class="errors" ng-messages="userForm.role.$error" md-auto-hide="false">
+                  <div ng-message="required">At least one required</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="33" class="row-padR">
+                <label>Sites</label>
+                <md-select name="sites" multiple ng-model="selectedUser.sites" ng-change="siteListChanged()" ng-required="true">
+                    <md-option ng-value="site.id" ng-repeat="site in selectedBusiness.business_sites">{{ site.name }}</md-option>
+                </md-select>
+                <div class="errors" ng-messages="userForm.sites.$error" md-auto-hide="false">
+                  <div ng-message="required">At least one required</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="33" class="row-padR">
+                <label>Default Site</label>
+                <md-select name="default_site" ng-model="selectedUser.default_site" ng-model-options="{trackBy: '$value'}" ng-required="true">
+                    <md-option ng-value="def_site.id" ng-repeat="def_site in defaultSites">{{ def_site.name }}</md-option>
+                </md-select>
+                <div class="errors" ng-messages="userForm.default_site.$error" md-auto-hide="false">
+                  <div ng-message="required">Required</div>
+                </div>
+            </md-input-container>
+        </div>
+
+        <div layout="row" class="row-padR marginV20">
+            <md-button ng-if="selectedUser.id" class="md-raised" ng-click="updateUser()"
+                       ng-disabled="userForm.$invalid">Update
+            </md-button>
+            <md-button ng-if="!selectedUser.id" class="md-raised" ng-click="createUser()"
+                       ng-disabled="userForm.$invalid">Create
+            </md-button>
+        </div>
+    </div>
+        </form>
+</div>
