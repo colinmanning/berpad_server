@@ -104,7 +104,7 @@ backoffice.factory( 'berpadService', ['$rootScope', '$http','Upload',
     factory.updateClub = function(club) {
         return $http({
             method: 'PUT',
-            url: apiUrl + "/sites/"+club.id+"/",
+            url: apiUrl + "/clubs/"+club.id+"/",
             data: club,
             responseType:'json',
             headers: {'Authorization': 'Token '+ $rootScope.token}
@@ -113,7 +113,34 @@ backoffice.factory( 'berpadService', ['$rootScope', '$http','Upload',
     factory.removeClub = function(club) {
         return $http({
             method: 'DELETE',
-            url: apiUrl + "/club/"+club.id+"/",
+            url: apiUrl + "/clubs/"+club.id+"/",
+            responseType:'json',
+            headers: {'Authorization': 'Token '+ $rootScope.token}
+        });
+    };
+
+    factory.createSportClub = function(sport_club) {
+        return $http({
+            method: 'POST',
+            url: apiUrl + "/sportclubs/",
+            data: sport_club,
+            responseType:'json',
+            headers: {'Authorization': 'Token '+ $rootScope.token}
+        });
+    };
+    factory.updateSportClub = function(sport_club) {
+        return $http({
+            method: 'PUT',
+            url: apiUrl + "/sportclubs/"+sport_club.id+"/",
+            data: club,
+            responseType:'json',
+            headers: {'Authorization': 'Token '+ $rootScope.token}
+        });
+    };
+    factory.removeSportClub = function(sport_club) {
+        return $http({
+            method: 'DELETE',
+            url: apiUrl + "/sportclubs/"+sport_club.id+"/",
             responseType:'json',
             headers: {'Authorization': 'Token '+ $rootScope.token}
         });

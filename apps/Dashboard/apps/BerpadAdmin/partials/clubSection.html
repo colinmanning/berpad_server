@@ -1,17 +1,17 @@
 <div ng-controller="ClubController">
     <div layout="row" class="row-padLR">
         <div flex="60">
-            <h2 class="marginV20">Clubs:</h2>
+            <h2 class="marginV20"Sport Clubs:</h2>
         </div>
         <div flex="40">
-            <h4 ng-if="$root.selectedBusiness && searchQuery == ''" style="text-align: right;">
+            <h4 ng-if="$root.selectedClub && searchQuery == ''" style="text-align: right;">
                 <span class="breadcrumbMain">Clubs</span>
-                <span class="breadcrumbSub"> > {{crudType}} Business</span></h4>
+                <span class="breadcrumbSub"> > {{crudType}} Sport Club</span></h4>
         </div>
     </div>
     <div layout="row" class="row-padLR">
         <md-input-container flex="60" class="row-padR">
-            <label>Search Business</label>
+            <label>Search Club</label>
             <input type="text" ng-model="searchQuery" ng-change="searchChanged(searchQuery)">
         </md-input-container>
 
@@ -20,75 +20,50 @@
         </div>
 
         <div flex="20" layout-align="center center">
-            <md-button class="md-raised" ng-click="emptyBusiness()">New Business</md-button>
+            <md-button class="md-raised" ng-click="emptySportClub()">New Sport Club</md-button>
         </div>
     </div>
 
     <div layout="row" class="row-padLR">
-        <md-progress-circular ng-if="businessListLoading" md-mode="indeterminate"
+        <md-progress-circular ng-if="sportClubListLoading" md-mode="indeterminate"
                               md-diameter="50"></md-progress-circular>
-        <p ng-if="noResults && filteredBusinesses.length == 0">No Results</p>
+        <p ng-if="noResults && filteredSportClubs.length == 0">No Results</p>
         <ul class="contentList" ng-if="showRecords">
-            <li ng-repeat="business in filteredBusinesses" ng-click="selectBusiness(business)">{{business.name}}</li>
+            <li ng-repeat="sportclub in filteredSportClubs" ng-click="selectSportClub(sportclub)">{{sportclub.name}}</li>
         </ul>
     </div>
 
-    <div class="selectedBusiness" ng-show="$root.selectedBusiness && searchQuery == ''">
-        <form name="businessForm" ng-app="backoffice" novalidate>
+    <div class="selectedSportClub" ng-show="$root.selectedSportClub && searchQuery == ''">
+        <form name="sportClubForm" ng-app="berpadAdmin" novalidate>
             <div layout="row" class="row-padLR">
                 <md-input-container class="row-padR" flex="50" md-is-error="businessForm.business_ref.$invalid">
-                    <label>Business Name</label>
+                    <label>Club Name</label>
                     <input type="text" name="business_name" ng-required="true" ng-minlength="3" ng-model="$root.selectedBusiness.name">
-                    <div ng-messages="businessForm.business_name.$error"
-                         ng-if="businessForm.business_name.$dirty">
-                        <div ng-message="ng-required">Business Name is required!</div>
+                    <div ng-messages="sportClubForm.club_name.$error"
+                         ng-if="sportClubForm.club_name.$dirty">
+                        <div ng-message="ng-required">Club Name is required!</div>
                         <div ng-message="ng-minlength">Must be at least 3 characters!</div>
                     </div>
                 </md-input-container>
-                <md-input-container flex="50" class="row-padR">
-                    <label>Business Type</label>
-                    <md-select ng-model="$root.selectedBusiness.business_type" ng-model-options="{trackBy: '$value'}">
-                        <md-option ng-value="business_type.value" ng-repeat="business_type in business_types">{{ business_type.label }}</md-option>
-                    </md-select>
-                </md-input-container>
             </div>
             <div layout="row" class="row-padLR">
-                <md-button ng-if="$root.selectedBusiness.id" class="md-primary" ng-click="updateBusiness()"
-                       ng-disabled="businessForm.$invalid">Update
+                <md-button ng-if="$root.selectedSportClub.id" class="md-primary" ng-click="updateSportClub()"
+                       ng-disabled="sportClubForm.$invalid">Update
                 </md-button>
-                <md-button ng-if="!$root.selectedBusiness.id" class="md-primary" ng-click="saveBusiness()"
-                       ng-disabled="businessForm.$invalid">Create
+                <md-button ng-if="!$root.selectedBusiness.id" class="md-primary" ng-click="saveSportClub()"
+                       ng-disabled="sportClubForm.$invalid">Create
                 </md-button>
             </div>
         </form>
 
         <div layout="row" class="row-padLR">
             <div flex="50">
-                <form name="form">
-                    <div>
-                        <label>DI File:</label>
-                        <md-button type="file" ngf-select ng-model="file" name="file" class="md-primary">
-                            <span ng-if="!file.name">Select</span>
-                            <span ng-if="file.name">Change</span>
-                            File <i class="fa fa-paperclip fa-2x" aria-hidden="true"></i></md-button>
-                        <br>
-                        {{file.name}}
-                        <md-button ng-if="file.name" class='md-raised md-primary' type="submit" ng-click="doImportDI()">
-                            Import
-                        </md-button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div layout="row" class="row-padLR">
-            <div flex="50">
-                <h2 class="marginV5">Sites:</h2>
+                <h2 class="marginV5">Members:</h2>
             </div>
 
             <div flex="50">
-                <button ng-if="!siteCrudVisible" ng-click="addSiteClicked()"
-                        class="btn light-green accent-4 waves-effect waves-light btn-primary" style="float:right;">Add a New Site
+                <button ng-if="!memberCrudVisible" ng-click="addMemberClicked()"
+                        class="btn light-green accent-4 waves-effect waves-light btn-primary" style="float:right;">Add a New Member
                 </button>
             </div>
         </div>
@@ -96,11 +71,10 @@
         <div layout="row" class="row-padLR">
             <table flex="100" class="table table-striped">
                 <tbody>
-                <tr ng-repeat="site in $root.selectedBusiness.business_sites">
+                <tr ng-repeat="site in $root.selectedSportClub.club_members">
                     <td class="col-lg-10">{{site.name}}</td>
                     <td class="col-lg-2">
-                        <!-- <i class="fa fa-trash fa-2x crudIcon" ng-click="removeSiteClicked(site)"></i> -->
-                        <i class="fa fa-pencil fa-2x crudIcon" ng-click="editSiteClicked(site)"></i>
+                        <i class="fa fa-pencil fa-2x crudIcon" ng-click="editMemberClicked(site)"></i>
                     </td>
                 </tr>
                 </tbody>

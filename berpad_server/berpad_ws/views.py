@@ -45,7 +45,7 @@ from wsgiref.util import FileWrapper
 from django.db.utils import IntegrityError
 
 from .models import Person, Role
-from .models import Event, Club, Venue
+from .models import Event, Club, ClubTypes, Venue
 from .models import Sport, SportFacility, SportClub, SportVenue
 
 from .serializers import PersonSerializer, RoleSerializer
@@ -60,6 +60,45 @@ from django.conf import settings
 @api_view(['GET', 'POST'])
 def not_allowed(request):
     return Response(status=status.HTTP_404_NOT_FOUND)
+
+'''
+A ViewSet to provide various useful services for Berpad clients
+'''
+class BerpadViewSet(viewsets.ModelViewSet):
+    '''
+    Provide access to things like class fields, lists etc, useful for client programs.
+    Foe example, returning types of switchclubses, so a user interface client can build a drop down list etc.
+    '''
+    queryset = Club.objects.all()
+    serializer_class = ClubSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    @list_route(methods=['get'])
+    def metadata(self, request):
+        metadata = {}
+        metadata['club_types'] = ClubTypes.CLUB_TYPES
+        '''
+        project_status_options = []
+        for k,v in ProjectStatus.labels.items():
+            ps = {'value': k, 'label':v}
+            project_status_options.append(ps)
+        metadata['project_status_options'] = project_status_options
+        business_types = []
+        for k,v in BusinessType.labels.items():
+            bt = {'value': k, 'label':v}
+            business_types.append(bt)
+        metadata['business_types'] = business_types
+        '''
+        # TODO remove hard coding, store and get from database
+        metadata['servers'] = {
+            "api": ["api.berpad.com",
+                    "api.staging.berpad.com"],
+            "mqtt": ["iot.berpad.com",
+                     "iot.staging.berpad.com"]
+        }
+
+        return Response(json.dumps(metadata), status.HTTP_200_OK)
 
 '''
 A ViewSet to handle roles
@@ -259,6 +298,19 @@ class SportViewSet(viewsets.ModelViewSet):
     '''
     queryset = Sport.objects.all()
     serializer_class = SportSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+'''
+A ViewSet to handle Clubs
+'''
+
+class ClubViewSet(viewsets.ModelViewSet):
+    '''
+    A Club organises activities for its members
+    '''
+    queryset = SportClub.objects.all()
+    serializer_class = SportClubSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 

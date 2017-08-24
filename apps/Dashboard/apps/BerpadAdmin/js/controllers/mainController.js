@@ -11,7 +11,7 @@ berpadAdmin.controller( 'MainController', [ '$scope', '$rootScope','$timeout', '
             $rootScope.token = $.cookie('berpadToken');
             $rootScope.username = $.cookie('berpadUsername');
             $rootScope.softwareVer = $.cookie('softwareVer');
-            apiaryService.getBerpadMetadata().then(function (response) {
+            berpadService.getBerpadMetadata().then(function (response) {
                 $rootScope.berpadMetadata = JSON.parse(response.data);
         });
        }
@@ -30,29 +30,22 @@ berpadAdmin.controller( 'MainController', [ '$scope', '$rootScope','$timeout', '
             $scope.currentTab = num;
         };
 
-        $rootScope.selectedBusiness = null;
-        $rootScope.businesses = [];
-        $rootScope.programs = [];
+        $rootScope.selectedSportClub = null;
+        $rootScope.sportClubs = [];
         $rootScope.users = [{first_name: 'test'}];
         getUsers();
-        getAllPrograms();
+        //getAllPrograms();
 
-        function getAllBusinesses() {
-            apiaryService.getFilteredBusinesses('').then(function (response) {
-                $rootScope.businesses = response.data;
-            });
-        };
-
-        function getAllPrograms() {
-            apiaryService.getAllPrograms().then(function (response) {
-                $rootScope.programs = response.data;
+        function getAllSportClubs() {
+            berpadService.getFilteredSportClubs('').then(function (response) {
+                $rootScope.sportClubs = response.data;
             });
         };
 
         function getUsers() {
-            apiaryService.getFilteredUsers('').then(function (response) {
+            berpadService.getFilteredUsers('').then(function (response) {
                 $rootScope.users = response.data;
-                getAllBusinesses();
+                getAllSportClubs();
             });
         };
 } ] );

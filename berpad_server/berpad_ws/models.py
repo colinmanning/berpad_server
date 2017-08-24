@@ -134,6 +134,17 @@ class Event(models.Model):
         return self.title
 
 '''
+Possible club types, used in UI to map to concrete class'''
+class ClubTypes(object):
+    DEFAULT = 'Club'
+    SPORT = 'SportClub'
+
+    CLUB_TYPES = (
+        (DEFAULT, DEFAULT),
+        (SPORT, SPORT),
+    )
+
+'''
 A club encapsulates any type of club, and in general serves as a sub class for specific types of clubs
 '''
 class Club(models.Model):

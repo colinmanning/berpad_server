@@ -1,4 +1,4 @@
-var backoffice = angular.module( 'backoffice', ['ngFileUpload', 'ngMaterial', 'ngMessages'] )
+var berpadAdmin = angular.module( 'berpadAdmin', ['ngFileUpload', 'ngMaterial', 'ngMessages'] )
     .config(function($mdThemingProvider, $mdDateLocaleProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('green')

@@ -5,8 +5,8 @@ berpadAdmin.controller('ClubController', ['$scope', '$rootScope', '$mdDialog', '
         $scope.showRecords = true;
         $scope.crudType = 'Create';
 
-        $scope.title = "Club";
-        $scope.site = null;
+        $scope.title = "Sport Club";
+        $scope.member = null;
         $scope.noResults = false;
         
         $scope.filteredClubs = [];
@@ -18,8 +18,6 @@ berpadAdmin.controller('ClubController', ['$scope', '$rootScope', '$mdDialog', '
 
         berpadService.getBerpadMetadata().then(function (response) {
             $scope.berpadMetadata = JSON.parse(response.data);
-            $scope.business_types = $scope.apiaryMetadata.business_types;
-            console.log('$scope.business_types',$scope.business_types);
         });
 
         $scope.showAll = function(){
@@ -29,8 +27,8 @@ berpadAdmin.controller('ClubController', ['$scope', '$rootScope', '$mdDialog', '
                 $scope.showRecords = true;
                 $scope.clubListLoading = true;
                 $scope.noResults = false;
-                apiaryService.getAllBusinesses().then(function (response) {
-                    $scope.filteredBusinesses = response.data;
+                berpadService.getAllSportClubs().then(function (response) {
+                    $scope.filteredSportClubs = response.data;
                     $scope.clubListLoading = false;
                     $scope.noResults = false;
                 }).then(function (response) {
@@ -48,7 +46,7 @@ berpadAdmin.controller('ClubController', ['$scope', '$rootScope', '$mdDialog', '
                     $scope.showRecords = true;
                     $scope.clubListLoading = true;
                     $scope.noResults = false;
-                    apiaryService.getFilteredClubs(query).then(function (response) {
+                    berpadService.getFilteredSportClubs(query).then(function (response) {
                         $scope.filteredClubs = response.data;
                         $scope.clubListLoading = false;
                         $scope.noResults = false;
@@ -62,46 +60,45 @@ berpadAdmin.controller('ClubController', ['$scope', '$rootScope', '$mdDialog', '
             }, 500);
         };
 
-        var numOfExistingSites = 0;
-        $scope.selectBusiness = function (business) {
-                var business_wait_load = $timeout(function() {
+        var numOfExistingMembers = 0;
+        $scope.selectSportClub = function (business) {
+                var sportclub_wait_load = $timeout(function() {
                                         $mdToast.show($mdToast.simple({position:'top right', parent:$('#mainContent')})
-                        .textContent('Loading business ...').hideDelay(5000));
+                        .textContent('Loading sport club ...').hideDelay(5000));
 
                 }, 250);
-                apiaryService.getBusinessComplete(business.id).then(function(response) {
-                    $rootScope.selectedBusiness = response.data;
+                berpadService.getSportClubComplete(sportclub.id).then(function(response) {
+                    $rootScope.selectedSportClub = response.data;
                     //$rootScope.selectedBusiness.business_type = business.business_type;
-                    numOfExistingSites = $rootScope.selectedBusiness.business_sites.length;
+                    numOfExistingMembers = $rootScope.selectedSportClub.club_members.length;
                     $scope.searchQuery = '';
                     $scope.crudType = 'Edit';
                     $scope.showRecords = false;
-                    $timeout.cancel(business_wait_load);
+                    $timeout.cancel(sportclub_wait_load);
                     $mdToast.show($mdToast.simple({position:'top right', parent:$('#mainContent')})
-                        .textContent($rootScope.selectedBusiness.name + ' business loaded.'));
+                        .textContent($rootScope.selectedBusiness.name + ' sport club loaded.'));
                     },
                     function(response) {
                         $timeout.cancel(business_wait_load);
                          $mdToast.show($mdToast.simple({position:'top right', parent:$('#mainContent')})
-                            .textContent('Failed to get business details'));
+                            .textContent('Failed to get sport club details'));
                     })
 
         };
-        $scope.emptyBusiness  = function () {
+        $scope.emptySportClub  = function () {
             $rootScope.selectedBusiness = {
                 name: '',
-                owner: '',
-                business_sites: []
+                club_members: []
             };
             $scope.showRecords = false;
             $scope.crudType = 'Create';
         };
 
-        $scope.addSiteClicked = function(){
+        $scope.addMemberClicked = function(){
             var modalInstance = $mdDialog.show({
                 animation: true,
-                templateUrl: 'partials/modalCreateUpdateSite.html',
-                controller: 'SiteCrudController',
+                templateUrl: 'partials/modalCreateUpdateMember.html',
+                controller: 'MemberCrudController',
                 size: 'lg',
                 backdrop: 'static',
                 resolve: {
