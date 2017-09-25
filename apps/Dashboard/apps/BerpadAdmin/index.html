@@ -35,12 +35,12 @@
 </head>
 <body ng-controller="MainController" layout="column">
     <div layout="row" class="header">
-        <div flex="40" id="limeLogo">
+        <div flex="40" id="berpadLogo">
             <img src="images/title_berpad_admin.png">
-            <span id="softwareVer">v.{{$root.softwareVer}}</span>
+            <span id="softwareVer">{{$root.softwareVer}}</span>
         </div>
         <div flex="40">
-            <span id="selectedBusiness">{{$root.selectedBusiness.name}}</span>
+            <span id="selectedSportClub">{{$root.selectedSportClub.name}}</span>
         </div>
         <div flex="10" class="mainMenu greenMainBtn">
             <div ng-click="backClicked()">
@@ -55,41 +55,23 @@
     </div>
     <div layout="row" flex>
         <div id="sidebar">
-            <div class="menuItem" id="bussinessMenuItem" ng-class="{'active': currentTab == 2}" ng-click="changeTab(2)">
+            <div class="menuItem" id="sportClubMenuItem" ng-class="{'active': currentTab == 2}" ng-click="changeTab(2)">
                 <span class="icon fa fa-briefcase"></span>
-                <span class="menuText">Business</span>
+                <span class="menuText">Sport Club</span>
             </div>
-            <div class="menuItem" id="programMenuItem" ng-class="{'active': currentTab == 7}" ng-click="changeTab(7)">
-                <span class="icon fa fa-file-text-o"></span>
-                <span class="menuText">Program</span>
-            </div>
-            <div class="menuItem" ng-if="$root.selectedBusiness" id="userMenuItem" ng-class="{'active': currentTab == 1}" ng-click="changeTab(1)">
+            <div class="menuItem" ng-if="$root.selectedSportClub" id="userMenuItem" ng-class="{'active': currentTab == 1}" ng-click="changeTab(1)">
                 <span class="icon fa fa-users"></span>
                 <span class="menuText">Users</span>
             </div>
-            <div class="menuItem" ng-if="$root.selectedBusiness" id="gatewayMenuItem" ng-class="{'active': currentTab == 3}" ng-click="changeTab(3)">
-                <span class="icon fa fa-signal"></span>
-                <span class="menuText">Gateways</span>
-            </div>
-            <!-- CTs going into Gateway panel after discussing with Martin - Colin
-            <div class="menuItem" ng-if="$root.selectedBusiness" id="pressacMenuItem" ng-class="{'active': currentTab == 4}" ng-click="changeTab(4)">
-                <span class="icon fa fa-dot-circle-o"></span>
-                <span class="menuText">CTs</span>
-            </div>
-            -->
-            <div class="menuItem" ng-if="$root.selectedBusiness" id="projectMenuItem" ng-class="{'active': currentTab == 5}" ng-click="changeTab(5)">
+            <div class="menuItem" ng-if="$root.selectedBusiness" id="memberMenuItem" ng-class="{'active': currentTab == 5}" ng-click="changeTab(5)">
                 <span class="icon fa fa-bolt"></span>
-                <span class="menuText">Projects</span>
-            </div>
-            <div class="menuItem" ng-if="$root.selectedBusiness" id="proposalMenuItem" ng-class="{'active': currentTab == 6}" ng-click="changeTab(6)">
-                <span class="icon fa fa-handshake-o"></span>
-                <span class="menuText">Proposal</span>
+                <span class="menuText">Members</span>
             </div>
 
         </div>
         <div id="mainContent">
             <div ng-if="currentTab == 1" ng-include="'partials/userSection.html'"></div>
-            <div ng-if="currentTab == 2" ng-include="'partials/deprecated/businessSection.html'"></div>
+            <div ng-if="currentTab == 2" ng-include="'partials/clubSection.html'"></div>
         </div>
     </div>
 </body>

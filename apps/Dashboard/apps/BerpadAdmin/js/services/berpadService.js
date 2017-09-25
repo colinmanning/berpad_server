@@ -1,4 +1,4 @@
-backoffice.factory( 'berpadService', ['$rootScope', '$http','Upload',
+berpadAdmin.factory( 'berpadService', ['$rootScope', '$http','Upload',
     function ($rootScope, $http, Upload) {
 
     var factory = {};
